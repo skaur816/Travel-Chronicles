@@ -1,7 +1,31 @@
+const getPosition = (options) => {
+    if (navigator.geolocation) {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        })
+    }
+}
+
+
+
 export default {
     name: 'post',
     type: 'document',
     title: 'Blog Post',
+    initialValue: async () => ({
+        postedAt: await getPosition()
+            .then(({coords}) => {
+               const { latitude, longitude, altitude } = coords
+               
+               return {
+                _type: 'geopoint',
+                lat: latitude,
+                lng: longitude,
+                alt: altitude || undefined
+               }
+            })
+            .catch(() => undefined)
+    }),
     fields: [
         {
             name: 'postedAt',
@@ -22,12 +46,12 @@ export default {
                 maxLength: 96,
             },
         },
-        // {
-        //     name: 'author',
-        //     type: 'reference',
-        //     title: 'Author',
-        //      to: { type: 'author'}, //this is commented out for now since author is not a schema yet
-        // },
+        {
+            name: 'author',
+            type: 'reference',
+            title: 'Author',
+             to: { type: 'author'}, //this is commented out for now since author is not a schema yet
+        },
         {
             name: 'mainImage',
             type: 'image',
@@ -36,22 +60,22 @@ export default {
                 hotspot: true, 
             },
         },
-        // {
-        //     name: 'categories',
-        //     type: 'array',
-        //     title: 'Categories',
-        //     of: [{ type: 'reference', to: { type: 'category'}}]
-        // },
+        {
+            name: 'categories',
+            type: 'array',
+            title: 'Categories',
+            of: [{ type: 'reference', to: { type: 'category'}}]
+        },
         {
             name: 'piblishedAt',
             type: 'datetime',
             title: 'Published At',
         },
-        // {
-        //     name: 'body',
-        //     type: 'blockContent',
-        //     title: 'Body',
-        // }
+         {
+             name: 'body',
+             type: 'blockContent',
+             title: 'Body',
+         }
         
     ]
 }
