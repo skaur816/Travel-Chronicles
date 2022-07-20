@@ -2,13 +2,30 @@ const mysql = require('mysql');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const { Sequelize } = require("sequelize");
+const bodyParser = require('body-parser');
 
 const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
-	password : 'GS5001998!',
+	password : 'root',
 	database : 'nodelogin'
 });
+
+connection.query(
+	`CREATE DATABASE IF NOT EXISTS nodelogin`,
+	function (err, results) {
+	  console.log(results);
+	  console.log(err);
+	}
+  );
+  
+
+const sequelize = new Sequelize("nodelogin", "root", "root", {
+	host: "localhost",
+	dialect: "mysql",
+  });
+
 
 const app = express();
 
@@ -17,14 +34,25 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, 'static')));
 
-// http://localhost:3000/
+http://localhost:3000/
 app.get('/', function(request, response) {
 	// Render login template
 	response.sendFile(path.join(__dirname + '/login.html'));
+});
+
+app.get('/', function (req, res) {
+    res.render('home');
+});
+
+app.get('/register', (req, res) => {
+    res.render('register');
 });
 
 // http://localhost:3000/auth
