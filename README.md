@@ -1,1 +1,6 @@
-# Travel-Chronicles
+## Run
+
+```bash
+npm install
+npm run start
+```
