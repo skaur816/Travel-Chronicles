@@ -7,28 +7,31 @@
   <title>Fund My Project!</title>
   <link rel="stylesheet" href="/css/jass.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
+  {{!-- <div class="flex-column justify-space-around">
+    <header class="display-flex justify-space-between align-center p-2"> --}}
       <h1>
         {{!-- <span role="img" aria-label="money">💸</span> --}}
-        <a href="/">Travel Chronicles!</a>
+        <a href="/" class="text-black">Travel Chronicles!</a>
       </h1>
       <nav>
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
-        <a href="/profile">Profile</a> |
-        <button class="no-button" id="logout">Logout</button>
+        <a href="/profile" class="text-success" >Profile</a> |
+        <button class="no-button text-danger font-weight-bolder" id="logout">Logout</button>
         {{else}}
-        <a href="/login">Login</a>
+        <a href="/login" class="text-success font-weight-bolder">Login</a>
         {{/if}}
       </nav>
     </header>
     <main class="container container-fluid mt-5">
+      <div id="road">
       <!-- Render the sub layout -->
       {{{ body }}}
+      </div>
     </main>
     <footer>
       
@@ -39,6 +42,10 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
