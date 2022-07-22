@@ -24,6 +24,7 @@ Created by: Mateusz Jakub Szmytkowski, Sherry Kaur, Liban Britt, Holly Haller, V
 ## Link
 
 ### Heroku
+https://travel-chronicless.herokuapp.com/
 
 ### Github
 https://github.com/skaur816/Travel-Chronicles
